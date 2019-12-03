@@ -1,0 +1,2 @@
+include ':app', ':base', ':service', ':login', ':mine', ':home', ':setting', ':shop', ':location'
+rootProject.name='WMRouter-Sample'
