@@ -18,11 +18,15 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".UriProxyActivity" android:exported="true">
+        <activity
+            android:name=".UriProxyActivity"
+            android:exported="true">
             <intent-filter>
                 <!-- 接收所有scheme为demo的外部URI跳转，不区分host和path -->
-                <data android:scheme="demo"/>
+                <data android:scheme="demo" />
             </intent-filter>
         </activity>
+
+        <activity android:name=".web.WebViewActivity" />
     </application>
 </manifest>

@@ -2,6 +2,7 @@ package com.zh.home
 
 import android.view.View
 import android.widget.Button
+import com.sankuai.waimai.router.Router
 import com.sankuai.waimai.router.annotation.RouterUri
 import com.zh.base.BaseActionBarActivity
 import com.zh.service.ModuleServiceManager
@@ -19,6 +20,8 @@ class HomeActivity : BaseActionBarActivity() {
     private lateinit var vGoAccountInfo: Button
     private lateinit var vGoSetting: Button
     private lateinit var vNearShop: Button
+    private lateinit var vGoWebBrowser: Button
+    private lateinit var vGoLocalBrowser: Button
 
     override fun onLayoutId(): Int {
         return R.layout.home_home_activity
@@ -34,6 +37,8 @@ class HomeActivity : BaseActionBarActivity() {
         vGoAccountInfo = view.findViewById(R.id.go_account_info)
         vNearShop = view.findViewById(R.id.near_shop)
         vGoSetting = view.findViewById(R.id.go_setting)
+        vGoWebBrowser = view.findViewById(R.id.go_web_browser)
+        vGoLocalBrowser = view.findViewById(R.id.go_local_browser)
     }
 
     private fun bindView() {
@@ -45,6 +50,12 @@ class HomeActivity : BaseActionBarActivity() {
         }
         vGoSetting.setOnClickListener {
             ModuleServiceManager.getSettingService().goAppSetting(this)
+        }
+        vGoWebBrowser.setOnClickListener {
+            Router.startUri(this@HomeActivity, "http://www.meituan.com")
+        }
+        vGoLocalBrowser.setOnClickListener {
+            Router.startUri(this@HomeActivity, "http://www.baidu.com")
         }
     }
 }

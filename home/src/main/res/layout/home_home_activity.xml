@@ -36,8 +36,32 @@
         android:text="设置"
         android:textColor="@android:color/black"
         android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/go_web_browser"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/near_shop" />
+
+    <Button
+        android:id="@+id/go_web_browser"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="内部浏览器"
+        android:textColor="@android:color/black"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@id/go_local_browser"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/go_setting" />
+
+    <Button
+        android:id="@+id/go_local_browser"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="本地浏览器"
+        android:textColor="@android:color/black"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/go_web_browser" />
 </androidx.constraintlayout.widget.ConstraintLayout>
