@@ -2,6 +2,8 @@
     package="com.zh.home">
 
     <application>
-        <activity android:name=".HomeActivity" />
+        <activity
+            android:name=".HomeActivity"
+            android:launchMode="singleInstance" />
     </application>
 </manifest>

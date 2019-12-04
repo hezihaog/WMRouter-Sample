@@ -1,0 +1,34 @@
+//是否提交到仓库
+def upload = true
+def release = true
+def name = project.name
+def info = rootProject.ext.modules.get(name)
+def vername = info.version
+if (upload) {
+    apply plugin: 'maven'
+    print('upload library logn to maven...')
+    group = rootProject.ext.moduleGroup
+    version = release ? vername : vername + '-SNAPSHOT'
+
+    task androidSourcesJar(type: Jar) {
+        classifier = 'sources'
+        from android.sourceSets.main.java.sourceFiles
+    }
+    artifacts {
+        //当前aar 文件名
+        //archives file("${name}.aar")
+        archives androidSourcesJar
+    }
+
+    uploadArchives {
+        repositories.mavenDeployer {
+            repository(url: MAVEN_R_URL) {
+                authentication(userName: MAVEN_D_USERNAME, password: MAVEN_D_PASSWORD)
+            }
+            snapshotRepository(url: MAVEN_S_URL) {
+                authentication(userName: MAVEN_D_USERNAME, password: MAVEN_D_PASSWORD)
+            }
+            pom.artifactId = name
+        }
+    }
+}

@@ -3,42 +3,120 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 // 添加kapt插件
 apply plugin: 'kotlin-kapt'
-// 应用WMRouter插件
+// 应用WMRouter插件，application插件模块才需要引入，其他module不需要
 apply plugin: 'WMRouter'
 
 android {
-    compileSdkVersion 29
+    compileSdkVersion 28
     buildToolsVersion "29.0.2"
 
     defaultConfig {
-        applicationId "com.zh.wmrouter.sample"
-        minSdkVersion 21
-        targetSdkVersion 29
-        versionCode 1
-        versionName "1.0"
+        minSdkVersion rootProject.ext.android.minSdkVersion
+        targetSdkVersion rootProject.ext.android.targetSdkVersion
+        applicationId "com.tongwei.bootrunsample"
+        versionCode 106
+        versionName "1.0.6"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
+
+        ndk {
+            abiFilters "armeabi-v7a"
+        }
     }
 
-    buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-        }
+    dexOptions {
+        javaMaxHeapSize "4g"
+        preDexLibraries = false
+    }
+
+    lintOptions {
+        checkReleaseBuilds false
+        abortOnError false
+        disable 'MissingTranslation', 'ExtraTranslation', 'GoogleAppIndexingWarning'
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
 }
 
+def baseName = "service"
+def baseInfo = rootProject.ext.modules.get(baseName)
+
+def loginName = "login"
+def loginInfo = rootProject.ext.modules.get(loginName)
+
+def homeName = "home"
+def homeInfo = rootProject.ext.modules.get(homeName)
+
+def settingName = "setting"
+def settingInfo = rootProject.ext.modules.get(settingName)
+
+def mineName = "mine"
+def mineInfo = rootProject.ext.modules.get(mineName)
+
+def shopName = "shop"
+def shopInfo = rootProject.ext.modules.get(shopName)
+
+def locationName = "location"
+def locationInfo = rootProject.ext.modules.get(locationName)
+
 dependencies {
-    api fileTree(dir: 'libs', include: ['*.jar'])
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    //base
+    if (baseInfo.alone) {
+        api group: rootProject.ext.moduleGroup, name: baseName, version: baseInfo.version
+    } else {
+        api project(":$baseName")
+    }
+
+    //login
+    if (loginInfo.alone) {
+        api group: rootProject.ext.moduleGroup, name: loginName, version: loginInfo.version
+    } else {
+        api project(":$loginName")
+    }
+
+    //home
+    if (homeInfo.alone) {
+        api group: rootProject.ext.moduleGroup, name: homeName, version: homeInfo.version
+    } else {
+        api project(":$homeName")
+    }
+
+    //setting
+    if (settingInfo.alone) {
+        api group: rootProject.ext.moduleGroup, name: settingName, version: settingInfo.version
+    } else {
+        api project(":$settingName")
+    }
+
+    //mine
+    if (mineInfo.alone) {
+        api group: rootProject.ext.moduleGroup, name: mineName, version: mineInfo.version
+    } else {
+        api project(":$mineName")
+    }
+
+    //shop
+    if (shopInfo.alone) {
+        api group: rootProject.ext.moduleGroup, name: shopName, version: shopInfo.version
+    } else {
+        api project(":$shopName")
+    }
+
+    //location
+    if (locationInfo.alone) {
+        api group: rootProject.ext.moduleGroup, name: locationName, version: locationInfo.version
+    } else {
+        api project(":$locationName")
+    }
+
+    //WMRouter
+    kapt rootProject.ext.deps.wm_router_compiler
+
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
-    //WMRouter
-    kapt "com.sankuai.waimai.router:compiler:$wxrouter_version"
-    //其他模块
-    api project(path: ':mine')
-    api project(path: ':login')
-    api project(path: ':home')
-    api project(path: ':setting')
-    api project(path: ':shop')
-    api project(path: ':location')
 }

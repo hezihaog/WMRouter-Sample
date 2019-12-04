@@ -59,6 +59,8 @@ class LoginActivity : BaseActionBarActivity() {
                 ModuleServiceManager.getLoginService().notifyLoginFailure()
             }
             ModuleServiceManager.getLoginService().notifyLoginSuccess()
+            //登录成功，跳转到主页
+            ModuleServiceManager.getHomeService().goHome(this)
             finish()
         }
     }
