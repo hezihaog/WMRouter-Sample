@@ -7,11 +7,14 @@ import android.webkit.WebSettings
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import android.widget.ProgressBar
+import com.blankj.utilcode.util.LogUtils
 import com.blankj.utilcode.util.ToastUtils
 import com.sankuai.waimai.router.annotation.RouterRegex
+import com.sankuai.waimai.router.common.UriParamInterceptor
 import com.zh.base.BaseActionBarActivity
 import com.zh.wmrouter.sample.AppConstant
 import com.zh.wmrouter.sample.R
+import com.zh.wmrouter.sample.interceptors.CommonParamInterceptor
 
 /**
  * <b>Package:</b> com.zh.wmrouter.sample.web <br>
@@ -19,7 +22,13 @@ import com.zh.wmrouter.sample.R
  * <b>@author:</b> zihe <br>
  * <b>Description:</b> Web网页内部加载 <br>
  */
-@RouterRegex(regex = AppConstant.Regex.INNER_URL_REGEX, exported = true, priority = 1)
+@RouterRegex(
+    regex = AppConstant.Regex.INNER_URL_REGEX,
+    exported = true,
+    priority = 1,
+    //设置拦截器，添加通用参数
+    interceptors = [CommonParamInterceptor::class, UriParamInterceptor::class]
+)
 class WebViewActivity : BaseActionBarActivity() {
     private lateinit var vProgressBar: ProgressBar
     private lateinit var vWebView: WebView
@@ -33,6 +42,7 @@ class WebViewActivity : BaseActionBarActivity() {
             finish()
             return
         }
+        LogUtils.d("WebView 加载Url => $mUrl")
     }
 
     override fun onLayoutId(): Int {

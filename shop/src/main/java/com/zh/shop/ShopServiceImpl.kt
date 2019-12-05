@@ -16,7 +16,7 @@ import com.zh.service.inter.ShopService
  * <b>@author:</b> zihe <br>
  * <b>Description:</b>  <br>
  */
-@RouterService(interfaces = [ShopService::class], key = [RouterUrls.SHOP_SERVICE])
+@RouterService(interfaces = [ShopService::class], key = [RouterUrls.SHOP_SERVICE], singleton = true)
 class ShopServiceImpl : ShopService {
     override fun goNearShop(
         context: Context,

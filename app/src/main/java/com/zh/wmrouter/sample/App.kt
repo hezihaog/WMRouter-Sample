@@ -1,6 +1,7 @@
 package com.zh.wmrouter.sample
 
 import android.app.Application
+import android.content.Context
 import com.blankj.utilcode.util.ToastUtils
 import com.sankuai.waimai.router.Router
 import com.sankuai.waimai.router.common.DefaultRootUriHandler
@@ -18,8 +19,17 @@ import com.zh.base.util.provider.ActivityProvider
  * <b>Description:</b>  <br>
  */
 class App : Application() {
+    companion object {
+        private lateinit var mInstance: App
+
+        fun getContext(): Context {
+            return mInstance.applicationContext
+        }
+    }
+
     override fun onCreate() {
         super.onCreate()
+        mInstance = this
         initActivityProvider()
         initRouter()
     }

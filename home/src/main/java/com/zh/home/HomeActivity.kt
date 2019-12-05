@@ -22,6 +22,8 @@ class HomeActivity : BaseActionBarActivity() {
     private lateinit var vNearShop: Button
     private lateinit var vGoWebBrowser: Button
     private lateinit var vGoLocalBrowser: Button
+    private lateinit var vTestNotFound: Button
+    private lateinit var vCallPhone: Button
 
     override fun onLayoutId(): Int {
         return R.layout.home_home_activity
@@ -39,6 +41,8 @@ class HomeActivity : BaseActionBarActivity() {
         vGoSetting = view.findViewById(R.id.go_setting)
         vGoWebBrowser = view.findViewById(R.id.go_web_browser)
         vGoLocalBrowser = view.findViewById(R.id.go_local_browser)
+        vTestNotFound = view.findViewById(R.id.test_not_found)
+        vCallPhone = view.findViewById(R.id.call_phone)
     }
 
     private fun bindView() {
@@ -56,6 +60,12 @@ class HomeActivity : BaseActionBarActivity() {
         }
         vGoLocalBrowser.setOnClickListener {
             Router.startUri(this@HomeActivity, "http://www.baidu.com")
+        }
+        vTestNotFound.setOnClickListener {
+            Router.startUri(this@HomeActivity, "/not_found")
+        }
+        vCallPhone.setOnClickListener {
+            Router.startUri(this@HomeActivity, "tel:123456789")
         }
     }
 }

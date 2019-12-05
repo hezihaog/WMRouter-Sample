@@ -21,4 +21,13 @@ class AppConstant private constructor() {
             const val HTTP_URL_REGEX = "http(s)?://.*"
         }
     }
+
+    class Method private constructor() {
+        companion object {
+            /**
+             * 获取版本号方法
+             */
+            const val GET_VERSION_CODE = "/method/get_version_code"
+        }
+    }
 }

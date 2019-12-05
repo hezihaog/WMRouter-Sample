@@ -12,7 +12,11 @@ import com.zh.service.inter.LocationService
  * <b>@author:</b> zihe <br>
  * <b>Description:</b>  <br>
  */
-@RouterService(interfaces = [LocationService::class], key = [RouterUrls.LOCATION_SERVICE])
+@RouterService(
+    interfaces = [LocationService::class],
+    key = [RouterUrls.LOCATION_SERVICE],
+    singleton = true
+)
 class LocationServiceImpl : LocationService {
     private val mMainHandler by lazy {
         Handler(Looper.getMainLooper())
