@@ -1,5 +1,6 @@
 package com.zh.home
 
+import android.content.Context
 import android.view.View
 import android.widget.Button
 import com.sankuai.waimai.router.Router
@@ -24,6 +25,7 @@ class HomeActivity : BaseActionBarActivity() {
     private lateinit var vGoLocalBrowser: Button
     private lateinit var vTestNotFound: Button
     private lateinit var vCallPhone: Button
+    private lateinit var vShowToast: Button
 
     override fun onLayoutId(): Int {
         return R.layout.home_home_activity
@@ -43,6 +45,7 @@ class HomeActivity : BaseActionBarActivity() {
         vGoLocalBrowser = view.findViewById(R.id.go_local_browser)
         vTestNotFound = view.findViewById(R.id.test_not_found)
         vCallPhone = view.findViewById(R.id.call_phone)
+        vShowToast = view.findViewById(R.id.show_toast)
     }
 
     private fun bindView() {
@@ -56,16 +59,23 @@ class HomeActivity : BaseActionBarActivity() {
             ModuleServiceManager.getSettingService().goAppSetting(this)
         }
         vGoWebBrowser.setOnClickListener {
-            Router.startUri(this@HomeActivity, "http://www.meituan.com")
+            Router.startUri(getContext(), "http://www.meituan.com")
         }
         vGoLocalBrowser.setOnClickListener {
-            Router.startUri(this@HomeActivity, "http://www.baidu.com")
+            Router.startUri(getContext(), "http://www.baidu.com")
         }
         vTestNotFound.setOnClickListener {
-            Router.startUri(this@HomeActivity, "/not_found")
+            Router.startUri(getContext(), "/not_found")
         }
         vCallPhone.setOnClickListener {
-            Router.startUri(this@HomeActivity, "tel:123456789")
+            Router.startUri(getContext(), "tel:123456789")
         }
+        vShowToast.setOnClickListener {
+            Router.startUri(getContext(), RouterUrls.SHOW_TOAST_HANDLER)
+        }
+    }
+
+    private fun getContext(): Context {
+        return this
     }
 }

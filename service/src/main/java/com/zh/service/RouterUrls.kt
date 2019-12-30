@@ -8,6 +8,11 @@ package com.zh.service
  */
 class RouterUrls private constructor() {
     companion object {
+        /**
+         * 显示吐司
+         */
+        const val SHOW_TOAST_HANDLER = "/show_toast_handler"
+
         //--------------------------- 首页 ---------------------------
 
         /**

@@ -54,6 +54,14 @@
         android:textSize="18sp" />
 
     <Button
+        android:id="@+id/show_toast"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="显示Toast"
+        android:textColor="@android:color/black"
+        android:textSize="18sp" />
+
+    <Button
         android:id="@+id/go_setting"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
