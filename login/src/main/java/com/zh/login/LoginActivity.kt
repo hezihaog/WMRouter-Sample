@@ -54,14 +54,15 @@ class LoginActivity : BaseActionBarActivity() {
             //登录成功
             try {
                 LoginStorage.saveUserInfo(username, password)
+                ModuleServiceManager.getLoginService().notifyLoginSuccess()
+                //登录成功，跳转到主页
+                ModuleServiceManager.getHomeService().goHome(this)
+                finish()
             } catch (e: Exception) {
                 e.printStackTrace()
+                //登录失败
                 ModuleServiceManager.getLoginService().notifyLoginFailure()
             }
-            ModuleServiceManager.getLoginService().notifyLoginSuccess()
-            //登录成功，跳转到主页
-            ModuleServiceManager.getHomeService().goHome(this)
-            finish()
         }
     }
 
